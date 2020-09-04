@@ -2,6 +2,12 @@
 
 Some enhanced elements for react-native-web to support hover on the web
 
+It requires a React Native version with Pressable support which was introduced in version 0.63
+
+## Demo
+
+https://codesandbox.io/s/young-surf-bbmzz?file=/src/App.tsx
+
 ## Installation
 
 ```sh

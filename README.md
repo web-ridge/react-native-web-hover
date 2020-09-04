@@ -18,7 +18,7 @@ npm install react-native-web-hover
 ```
 
 ## Usage
-```
+```tsx
 import { Hoverable, Pressable, } from 'react-native-web-hover'
 
 // The Pressable, you can still provide normal styles or children without functions!

@@ -15,14 +15,9 @@ npm install react-native-web-hover
 ```
 
 ## Usage
+We recommend the "Pressable" component. You can see all the examples here:
+https://codesandbox.io/s/young-surf-bbmzz?file=/src/App.tsx
 
-```js
-import WebHover from "react-native-web-hover";
-
-// ...
-
-const result = await WebHover.multiply(3, 7);
-```
 
 ## Contributing
 

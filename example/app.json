@@ -1,0 +1,22 @@
+{
+  "name": "react-native-web-hover-example",
+  "displayName": "WebHover Example",
+  "expo": {
+    "name": "react-native-web-hover-example",
+    "slug": "react-native-web-hover-example",
+    "description": "Example app for react-native-web-hover",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

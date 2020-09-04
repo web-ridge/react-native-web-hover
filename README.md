@@ -18,10 +18,47 @@ npm install react-native-web-hover
 ```
 
 ## Usage
-We recommend the "Pressable" component. You can see all the examples here:
+```
+import { Hoverable, Pressable, } from 'react-native-web-hover'
+
+// The Pressable, you can still provide normal styles or children without functions!
+ <Pressable
+      style={({ hovered, focused, pressed }) => [
+        styles.buttonRoot,
+        hovered && styles.buttonHovered,
+        focused && styles.buttonFocused,
+        pressed && styles.buttonPressed
+      ]}
+    >
+      {({ hovered, focused, pressed }) => (
+        <View style={styles.buttonInner}>
+          <Text style={styles.buttonLabel}>
+            {label}
+          </Text>
+        </View>
+      )}
+    </Pressable>
+
+       // The Hoverable
+      <Hoverable>
+        {({ hovered }) => (
+          <Button
+            title="legacy button"
+            onPress={() => {}}
+            color={hovered ? "black" : "grey"}
+          />
+        )}
+      </Hoverable>
+```
+
+We recommend the "Pressable" component. You can see examples here:
 https://codesandbox.io/s/young-surf-bbmzz?file=/src/App.tsx
 
-If you want to update the hover inside FlatList, ScrollViews or VirtualizedList when the user scrolls, don't forget to import these views from this library.
+
+
+
+### Nested Scrollables
+If you want to update the hover inside **NESTED** FlatList, ScrollViews or VirtualizedList when the user scrolls, don't forget to import these views from this library.
 
 import { Hoverable, Pressable, ScrollView, FlatList, VirtualizedList } from 'react-native-web-hover'
 

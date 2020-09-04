@@ -1,15 +1,19 @@
 import * as React from 'react';
+import type {
+  ViewProps,
+  StyleProp,
+  ViewStyle,
+  PressableStateCallbackType,
+} from 'react-native';
+
 import {
   View,
   Pressable as NativePressable,
   ScrollView as NativeScrollView,
   FlatList as NativeFlatList,
   VirtualizedList as NativeVirtualizedList,
-  ViewProps,
-  StyleProp,
-  ViewStyle,
-  PressableStateCallbackType,
-} from 'react-native';
+  //@ts-ignore
+} from 'react-native-web';
 
 const hoverListener = createHoverListener();
 
@@ -85,12 +89,12 @@ function PressableWithoutRef(
     <NativePressable
       //@ts-ignore
       ref={setRef}
-      style={(interactionState) =>
+      style={(interactionState: any) =>
         typeof style === 'function'
           ? style({ ...interactionState, hovered })
           : style
       }
-      children={(interactionState) =>
+      children={(interactionState: any) =>
         typeof children === 'function'
           ? children({ ...interactionState, hovered })
           : children

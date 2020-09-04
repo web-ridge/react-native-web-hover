@@ -15,6 +15,12 @@ import {
   //@ts-ignore
 } from 'react-native-web';
 
+const isServer = !!(
+  typeof process !== 'undefined' &&
+  process.release &&
+  process.release.name === 'node'
+);
+
 const hoverListener = createHoverListener();
 
 interface PressableStateCallbackTypeWeb extends PressableStateCallbackType {
@@ -122,7 +128,7 @@ function containsEvent(parent: any, clickTarget: any) {
 function createHoverListener() {
   //@ts-ignore
   // eslint-disable-next-line no-undef
-  let hasMouse = matchMedia('(pointer:fine)').matches;
+  let hasMouse = isServer ? false : matchMedia('(pointer:fine)').matches;
 
   // would be nice if this could be kind of map
   // with the reference as key for fast lookup

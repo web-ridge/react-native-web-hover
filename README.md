@@ -23,7 +23,7 @@ https://codesandbox.io/s/young-surf-bbmzz?file=/src/App.tsx
 
 If you want hover support inside FlatList, ScrollViews or VirtualizedList don't forget to import these views from this library.
 
-import { Hoverable, Pressable, ScrollView, FlatList, VirtualizedList from 'react-native-web-hover'
+import { Hoverable, Pressable, ScrollView, FlatList, VirtualizedList } from 'react-native-web-hover'
 
 ## Contributing
 

@@ -18,7 +18,7 @@
     "react-dom": "16.11.0",
     "react-native": "0.62.2",
     "react-native-unimodules": "~0.10.1",
-    "react-native-web": "^0.12.3"
+    "react-native-web": "^0.13.9"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",

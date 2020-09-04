@@ -25,12 +25,12 @@ function App() {
         Native 0.63 to create rich button states.
       </Text>
       {[...Array(20)].map((_, i) => (
-        <NiceButton label={`Button ${i}`} />
+        <NiceButton key={i} label={`Button ${i}`} />
       ))}
       <View style={{ backgroundColor: 'lightblue', margin: 20 }}>
         <ScrollView style={{ height: 200 }}>
           {[...Array(20)].map((_, i) => (
-            <NiceButton label={`Button ${i}`} />
+            <NiceButton key={i} label={`Button ${i}`} />
           ))}
         </ScrollView>
       </View>

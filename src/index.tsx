@@ -128,31 +128,33 @@ function containsEvent(parent: any, clickTarget: any) {
 }
 
 function createHoverListener() {
-  //@ts-ignore
-  // eslint-disable-next-line no-undef
-  let hasMouse = isServer ? false : matchMedia('(pointer:fine)').matches;
+  let hasMouse = isServer ? false : window.matchMedia('(pointer:fine)').matches;
 
-  // would be nice if this could be kind of map
-  // with the reference as key for fast lookup
-  let pressableRefs: any[] = [];
-  let previousHoveredRef: any;
+  let refs = new Map<any, (h: boolean) => any>();
+  let previousHoverFunc: undefined | ((h: boolean) => any);
   let mousePosition = {
     x: 0,
     y: 0,
   };
 
   function hover(target: any) {
-    let hoveredRef = pressableRefs.find((r) => {
-      return containsEvent(r.ref, target);
-    });
+    // hover is targeted directly
+    let hoverFunc = refs.get(target);
 
-    if (previousHoveredRef) {
-      previousHoveredRef.setHovered(false);
+    // let's try to see if any of the children of the hover event are hovered
+    if (!hoverFunc) {
+      for (let r of refs.keys()) {
+        if (containsEvent(r, target)) {
+          hoverFunc = refs.get(r);
+        }
+      }
     }
-    if (hoveredRef) {
-      hoveredRef.setHovered(true);
-    }
-    previousHoveredRef = hoveredRef;
+
+    previousHoverFunc && previousHoverFunc(false);
+    hoverFunc && hoverFunc(true);
+
+    // cache the previous hover so we can un-hover this later on
+    previousHoverFunc = hoverFunc;
   }
 
   function hoverEvent(event: any) {
@@ -160,9 +162,7 @@ function createHoverListener() {
   }
 
   function unhover() {
-    if (previousHoveredRef) {
-      previousHoveredRef.setHovered(false);
-    }
+    previousHoverFunc && previousHoverFunc(false);
   }
 
   function captureMousePosition(event: any) {
@@ -174,26 +174,20 @@ function createHoverListener() {
   // if the user would click something it keeps hovered while it should unhover
   // so only listen to these events if the device has a mouse
   if (hasMouse) {
-    //@ts-ignore
     document.onmouseover = hoverEvent;
-    //@ts-ignore
     document.onmousemove = captureMousePosition;
-    //@ts-ignore
     document.ontouchstart = unhover;
-    //@ts-ignore
     document.ontouchend = unhover;
-    //@ts-ignore
     document.ontouchcancel = unhover;
-    //@ts-ignore
     document.ontouchmove = unhover;
   }
 
   function add(ref: any, setHovered: any) {
-    pressableRefs.push({ ref, setHovered });
+    refs.set(ref, setHovered);
   }
 
   function remove(ref: any) {
-    pressableRefs = pressableRefs.filter((r) => r.ref !== ref);
+    refs.delete(ref);
   }
 
   return {
@@ -230,16 +224,13 @@ function enhanceScrollView(WrappedComponent: any) {
     const onScrollInner = (e: any) => {
       onScroll && onScroll(e);
       const { mousePosition, hover } = hoverListener;
-      //@ts-ignore
-      let element = document.elementFromPoint(mousePosition.x, mousePosition.y);
-
-      hover(element);
+      hover(document.elementFromPoint(mousePosition.x, mousePosition.y));
     };
     return (
       <WrappedComponent
         ref={forwardedRef}
         onScroll={onScrollInner}
-        scrollEventThrottle={scrollEventThrottle || 60}
+        scrollEventThrottle={scrollEventThrottle || 25}
         {...rest}
       />
     );

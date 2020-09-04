@@ -219,7 +219,12 @@ function setAndForwardRef({ getForwardedRef, setLocalRef }: any) {
 }
 
 function enhanceScrollView(WrappedComponent: any) {
-  return ({ onScroll, scrollEventThrottle, ...rest }: any) => {
+  const EnhancedScrollView = ({
+    forwardedRef,
+    onScroll,
+    scrollEventThrottle,
+    ...rest
+  }: any) => {
     const onScrollInner = (e: any) => {
       onScroll && onScroll(e);
       const { mousePosition, hover } = hoverListener;
@@ -230,12 +235,17 @@ function enhanceScrollView(WrappedComponent: any) {
     };
     return (
       <WrappedComponent
+        ref={forwardedRef}
         onScroll={onScrollInner}
         scrollEventThrottle={scrollEventThrottle || 60}
         {...rest}
       />
     );
   };
+
+  return React.forwardRef((props, ref) => {
+    return <EnhancedScrollView {...props} forwardedRef={ref} />;
+  });
 }
 
 export const Pressable = React.forwardRef(PressableWithoutRef);

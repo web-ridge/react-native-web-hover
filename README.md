@@ -57,10 +57,10 @@ https://codesandbox.io/s/young-surf-bbmzz?file=/src/App.tsx
 
 
 
-### Nested Scrollables
-If you want to update the hover inside **NESTED** FlatList, ScrollViews or VirtualizedList when the user scrolls, don't forget to import these views from this library.
+### If your app is inside an iframe
+If your webapp is included in an iframe you will need the FlatList, ScrollViews or VirtualizedList from our library.
 
-import { Hoverable, Pressable, ScrollView, FlatList, VirtualizedList } from 'react-native-web-hover'
+import { ScrollView, FlatList, VirtualizedList } from 'react-native-web-hover'
 
 ## Contributing
 

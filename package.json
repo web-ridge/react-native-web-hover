@@ -1,6 +1,6 @@
 {
   "name": "react-native-web-hover",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Some enhanced elements for react-native-web to support hover on the web",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",

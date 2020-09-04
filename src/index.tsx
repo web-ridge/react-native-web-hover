@@ -4,6 +4,9 @@ import type {
   StyleProp,
   ViewStyle,
   PressableStateCallbackType,
+  FlatListProps,
+  VirtualizedListProps,
+  ScrollViewProps,
 } from 'react-native';
 
 import {
@@ -15,11 +18,10 @@ import {
   //@ts-ignore
 } from 'react-native-web';
 
-const isServer = !!(
+const isServer =
   typeof process !== 'undefined' &&
   process.release &&
-  process.release.name === 'node'
-);
+  process.release.name === 'node';
 
 const hoverListener = createHoverListener();
 
@@ -249,6 +251,12 @@ function enhanceScrollView(WrappedComponent: any) {
 }
 
 export const Pressable = React.forwardRef(PressableWithoutRef);
-export const ScrollView = enhanceScrollView(NativeScrollView);
-export const FlatList = enhanceScrollView(NativeFlatList);
-export const VirtualizedList = enhanceScrollView(NativeVirtualizedList);
+export const ScrollView = enhanceScrollView(
+  NativeScrollView
+) as React.ElementType<ScrollViewProps>;
+export const FlatList = enhanceScrollView(NativeFlatList) as React.ElementType<
+  FlatListProps<unknown>
+>;
+export const VirtualizedList = enhanceScrollView(
+  NativeVirtualizedList
+) as React.ElementType<VirtualizedListProps<unknown>>;

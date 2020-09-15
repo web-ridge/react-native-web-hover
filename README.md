@@ -1,3 +1,6 @@
+UPDATE: React Native Web is working now on internal hover support, which will be added in 0.14! https://github.com/necolas/react-native-web/issues/1719
+
+
 # react-native-web-hover
 
 Some enhanced elements for react-native-web to support hover on the web!

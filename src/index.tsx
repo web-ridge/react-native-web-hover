@@ -7,6 +7,7 @@ import type {
   FlatListProps,
   VirtualizedListProps,
   ScrollViewProps,
+  PressableProps as NativePressableProps,
 } from 'react-native';
 
 import {
@@ -44,7 +45,7 @@ interface HoverableProps extends ViewProps {
     | ((state: { hovered: boolean }) => React.ReactNode);
 }
 
-interface PressableProps extends Omit<ViewProps, 'style'> {
+interface PressableProps extends Omit<NativePressableProps, 'style'> {
   children: ChildrenType;
   style?: StylesType;
 }
